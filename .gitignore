@@ -1,4 +1,4 @@
 *.tfstate
 *.tfstate*
 *.terraform/
-
+.idea/
