@@ -12,7 +12,7 @@ variable "internet_gws" {
   )
 }
 variable "nat_gws" {
-  description = "nat gateways for VPC "
+  description = "Nat gateways for VPC "
   type = map(
     object({ name = string
     subnet = string })
@@ -27,7 +27,7 @@ variable "subnets" {
     availability_zone   = string
     routes = list(object({
       cidr        = string
-      internet_qw = optional(string)
+      internet_gw = optional(string)
       nat_gw      = optional(string)
     }))
   }))
