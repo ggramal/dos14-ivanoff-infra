@@ -70,6 +70,7 @@ resource "aws_route_table" "routes" {
     Name = "rtb-${each.value.name}-${var.name}"
   }
 }
+# Create route table association
 resource "aws_route_table_association" "subnets" {
   for_each       = aws_subnet.subnet
   subnet_id      = aws_subnet.subnet[each.key].id
