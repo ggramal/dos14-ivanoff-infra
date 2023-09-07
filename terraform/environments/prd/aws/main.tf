@@ -34,6 +34,14 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
+module "vpcs" {
+  source       = "../../../modules/aws/vpc"
+  name         = local.vpcs["ivanoff-tf"].name
+  cidr         = local.vpcs["ivanoff-tf"].cidr
+  internet_gws = local.vpcs["ivanoff-tf"].internet_gws
+  nat_gws      = local.vpcs["ivanoff-tf"].nat_gws
+  subnets      = local.vpcs["ivanoff-tf"].subnets
+}
 resource "aws_instance" "bank" {
   ami                    = data.aws_ami.ubuntu.image_id
   instance_type          = "t3.micro"
