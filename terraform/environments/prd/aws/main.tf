@@ -11,6 +11,7 @@ terraform {
     region         = "eu-central-1"
     dynamodb_table = "tf_state_ivanoff"
   }
+
 }
 
 provider "aws" {
@@ -40,4 +41,10 @@ module "vpcs" {
   internet_gws = local.vpcs["ivanoff-tf"].internet_gws
   nat_gws      = local.vpcs["ivanoff-tf"].nat_gws
   subnets      = local.vpcs["ivanoff-tf"].subnets
+=======
+resource "aws_instance" "bank" {
+  ami                    = data.aws_ami.ubuntu.image_id
+  instance_type          = "t3.micro"
+  key_name               = "gae"
+  vpc_security_group_ids = ["sg-054db3afbc0cbfe19"]
 }
