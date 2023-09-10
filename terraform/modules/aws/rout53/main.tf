@@ -3,13 +3,13 @@ provider "aws" {
 }
 
 resource "aws_route53_zone" "zone" {
-  name = "ivanoff.smodata.net"
+  name = var.domain_name
 }
 
 resource "aws_route53_record" "record" {
   zone_id = aws_route53_zone.zone.zone_id
-  name    = aws_route53_zone.zone.name
-  type    = "A"
+  name    = var.domain_name
+  type    = var.record_type
   ttl     = "300"
-  records = [""]
+  records = var.records
 }

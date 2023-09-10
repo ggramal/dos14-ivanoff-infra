@@ -6,6 +6,12 @@ terraform {
     }
   }
 }
+backend "s3" {
+  bucket         = "dos14-tf-state"
+  key            = "ivanoff/prd/aws/state.tfstate"
+  region         = "eu-central-1"
+  dynamodb_table = "tf_state_ivanoff"
+}
 
 provider "aws" {
   region = "eu-central-1"
