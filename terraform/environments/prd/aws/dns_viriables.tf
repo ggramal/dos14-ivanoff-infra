@@ -4,7 +4,7 @@ variable "domain_name" {
 }
 
 variable "records" {
-  description = "A address of DNS records"
+  description = "A string of DNS records, example: ["192.158.1.1"]"
   type        = list(string)
 }
 
