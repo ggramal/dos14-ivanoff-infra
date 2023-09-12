@@ -5,8 +5,8 @@ variable "domain_name" {
 }
 
 variable "records" {
-  description = "A list of DNS records for Route53"
-  type        = list(string)
+  description = "A string of DNS records, example: 192.168.1.1,192.168.1.2"
+  type        = string
 }
 
 variable "record_type" {

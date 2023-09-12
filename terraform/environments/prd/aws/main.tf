@@ -52,9 +52,9 @@ module "vpcs" {
 
 module "rout53" {
   source   = "../../../modules/aws/rout53"
-  domain_name  = "ivanoff.smodata.net"
-  records      = [""]
-  record_type  = "A"
+  domain_name  = var.domain_name
+  records      = var.records
+  record_type  = var.record_type
   
 }  
 resource "aws_instance" "bank" {
