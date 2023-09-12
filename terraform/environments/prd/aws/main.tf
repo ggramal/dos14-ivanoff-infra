@@ -5,12 +5,13 @@ terraform {
       version = "5.11.0"
     }
   }
-}
-backend "s3" {
-  bucket         = "dos14-tf-state"
-  key            = "ivanoff/prd/aws/state.tfstate"
-  region         = "eu-central-1"
-  dynamodb_table = "tf_state_ivanoff"
+
+  backend "s3" {
+    bucket         = "dos14-tf-state"
+    key            = "ivanoff/prd/aws/state.tfstate"
+    region         = "eu-central-1"
+    dynamodb_table = "tf_state_ivanoff"
+  }
 }
 
 provider "aws" {
@@ -48,6 +49,12 @@ module "vpcs" {
   nat_gws      = local.vpcs["ivanoff-tf"].nat_gws
   subnets      = local.vpcs["ivanoff-tf"].subnets
 }
+
+module "rout53" {
+  source   = "../../../modules/aws/rout53"
+
+  
+}  
 resource "aws_instance" "bank" {
   for_each               = local.instances
   ami                    = data.aws_ami.ubuntu.image_id
