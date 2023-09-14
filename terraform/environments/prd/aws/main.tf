@@ -42,9 +42,25 @@ module "vpcs" {
   nat_gws      = local.vpcs["ivanoff-tf"].nat_gws
   subnets      = local.vpcs["ivanoff-tf"].subnets
 }
-resource "aws_instance" "bank" {
-  ami                    = data.aws_ami.ubuntu.image_id
-  instance_type          = "t3.micro"
-  key_name               = "gae"
-  vpc_security_group_ids = ["sg-054db3afbc0cbfe19"]
+###  !!!!!!   DON`T REMOVE "bank"  !!!!!!
+#resource "aws_instance" "bank" {
+#  ami                    = data.aws_ami.ubuntu.image_id
+#  instance_type          = "t3.micro"
+#  key_name               = "gae"
+#  vpc_security_group_ids = ["sg-054db3afbc0cbfe19"]
+#}
+module "rds" {
+  source              = "../../../modules/aws/rds"
+  name                = local.rds["rds-ivanoff-tf"].name
+  engine              = local.rds["rds-ivanoff-tf"].engine
+  identifier          = local.rds["rds-ivanoff-tf"].identifier
+  allocated_storage   = local.rds["rds-ivanoff-tf"].allocated_storage
+  engine_version      = local.rds["rds-ivanoff-tf"].engine_version
+  instance_class      = local.rds["rds-ivanoff-tf"].instance_class
+  username            = local.rds["rds-ivanoff-tf"].username
+  password            = local.rds["rds-ivanoff-tf"].password
+  skip_final_snapshot = local.rds["rds-ivanoff-tf"].skip_final_snapshot
+  rds-subnet          = local.rds["rds-ivanoff-tf"].rds-subnet
+  rds-sg              = local.rds["rds-ivanoff-tf"].rds-sg
+  vpc_id              = module.vpcs.vpc_id
 }
