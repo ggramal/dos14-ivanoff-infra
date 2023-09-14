@@ -4,14 +4,19 @@ variable "domain_name" {
 }
 
 variable "records" {
-  description = "A address of DNS records"
-  type        = list(string)
+  description = "A list of DNS records"
+  type        = list(object({
+    zone_id     = string
+    name        = string
+    type        = string
+    ttl         = string
+    records     = string
+  }))
+  default     = []
 }
 
 variable "record_type" {
   description = "Type of DNS"
   type        = string
 }
-
-
 
