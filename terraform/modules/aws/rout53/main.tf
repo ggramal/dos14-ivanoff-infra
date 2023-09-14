@@ -12,5 +12,5 @@ resource "aws_route53_record" "record" {
   name    = var.domain_name
   type    = var.record_type
   ttl     = "300"
-  records = var.records
+  records = var.records[count.index].records
 }

@@ -10,7 +10,7 @@ variable "records" {
     name        = string
     type        = string
     ttl         = string
-    records     = string
+    records     = list(string)
   }))
   default     = []
 }
