@@ -87,4 +87,42 @@ locals {
       }
     }
   }
+  rds = {
+    rds-ivanoff-tf = {
+      name                = "rds-ivanoff-tf"
+      engine              = "postgres"
+      identifier          = "rds-ivanoff-tf"
+      allocated_storage   = 5
+      engine_version      = "15.3"
+      instance_class      = "db.t3.micro"
+      username            = "Ivanoff"
+      skip_final_snapshot = true
+      rds-subnet = {
+        rds-subnet-1a = {
+          name              = "rds-subnet-1a-ivanoff-tf"
+          cidr              = "10.0.7.0/24"
+          availability_zone = "eu-north-1a"
+        }
+        rds-subnet-1b = {
+          name              = "rds-subnet-1b-ivanoff-tf"
+          cidr              = "10.0.8.0/24"
+          availability_zone = "eu-north-1b"
+        }
+      }
+      rds-sg = {
+        ingress = {
+          from_port   = 5432
+          to_port     = 5432
+          protocol    = "tcp"
+          cidr_blocks = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+        }
+        egress = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          cidr_blocks = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+        }
+      }
+    }
+  }
 }

@@ -19,7 +19,7 @@ variable "nat_gws" {
   )
 }
 variable "subnets" {
-  description = "subnets fot vpc"
+  description = "subnets for vpc"
   type = map(object({
     name                = string
     cidr                = string
