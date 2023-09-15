@@ -95,8 +95,7 @@ locals {
       allocated_storage   = 5
       engine_version      = "15.3"
       instance_class      = "db.t3.micro"
-      username            = "testuser"
-      password            = "testpass"
+      username            = "Ivanoff"
       skip_final_snapshot = true
       rds-subnet = {
         rds-subnet-1a = {

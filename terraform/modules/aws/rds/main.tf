@@ -36,7 +36,13 @@ resource "aws_security_group" "rds_sg" {
     Name = "rds-sg-ivanoff-tf"
   }
 }
-#create a RDS Database Instance
+# generate random RDS password
+resource "random_password" "password" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+# create a RDS Database Instance
 resource "aws_db_instance" "postgres" {
   engine                 = var.engine
   identifier             = var.identifier
@@ -44,9 +50,10 @@ resource "aws_db_instance" "postgres" {
   engine_version         = var.engine_version
   instance_class         = var.instance_class
   username               = var.username
-  password               = var.password
+  password               = random_password.password.result
   parameter_group_name   = var.parameter_group_name
   vpc_security_group_ids = ["${aws_security_group.rds_sg.id}"]
   db_subnet_group_name   = aws_db_subnet_group.db_subnet.name
   skip_final_snapshot    = var.skip_final_snapshot
 }
+

@@ -58,7 +58,6 @@ module "rds" {
   engine_version      = local.rds["rds-ivanoff-tf"].engine_version
   instance_class      = local.rds["rds-ivanoff-tf"].instance_class
   username            = local.rds["rds-ivanoff-tf"].username
-  password            = local.rds["rds-ivanoff-tf"].password
   skip_final_snapshot = local.rds["rds-ivanoff-tf"].skip_final_snapshot
   rds-subnet          = local.rds["rds-ivanoff-tf"].rds-subnet
   rds-sg              = local.rds["rds-ivanoff-tf"].rds-sg
