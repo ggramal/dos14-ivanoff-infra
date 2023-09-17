@@ -42,6 +42,10 @@ module "vpcs" {
   nat_gws      = local.vpcs["ivanoff-tf"].nat_gws
   subnets      = local.vpcs["ivanoff-tf"].subnets
 }
+
+module "asgs" {
+  source = "../../../modules/aws/asg"
+}
 ###  !!!!!!   DON`T REMOVE "bank"  !!!!!!
 #resource "aws_instance" "bank" {
 #  ami                    = data.aws_ami.ubuntu.image_id

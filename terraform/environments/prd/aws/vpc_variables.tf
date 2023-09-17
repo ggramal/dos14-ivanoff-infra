@@ -125,4 +125,67 @@ locals {
       }
     }
   }
+
+  asgs = {
+    asg_sg = {
+      ingress = {
+        from_port   = 443
+        to_port     = 443
+        protocol    = "tcp"
+        cidr_blocks = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+        }
+      ingress = {
+        from_port  = 80
+        to_port    = 80
+        protocol   = "tcp"
+        cidr_block = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+      }
+      egress = {
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+      }
+    }
+    asgs_services = {
+      asg_ivanoff_authn_tf = {
+        lt = {
+          name = "lt-authn-tf"
+        }
+        asg = {
+          name = "asg-authn-tf"
+          availability_zones = ["eu-north-1b", "eu-north-1c"]
+          desired_capacity = 2
+          min_size = 2
+          max_size = 4
+        }
+      }
+
+      asg_ivanoff_authz_tf = {
+        lt = {
+          name = "lt-authz-tf"
+        }
+        asg = {
+          name = "asg-authz-tf"
+          availability_zones = ["eu-north-1a", "eu-north-1c"]
+          desired_capacity = 2
+          min_size = 2
+          max_size = 4
+        }
+      }
+
+      asg_ivanoff_bank_tf = {
+        lt = {
+          name = "lt-bank-tf"
+        }
+        asg = {
+          name = "asg-bank-tf"
+          availability_zones = ["eu-north-1a", "eu-north-1b"]
+          desired_capacity = 2
+          min_size = 2
+          max_size = 4
+        }
+      }
+    }  
+  }
 }
