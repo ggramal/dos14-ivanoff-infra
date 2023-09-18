@@ -30,7 +30,7 @@ resource "aws_autoscaling_group" "asg" {
     min_size = each.value.min_size
     max_size = each.value.max_size
     launch_template {
-      id = each.value.value.lt.name.id
+      id = each.value.lt.name.id
       version = "$Latest"
     }
 }
@@ -38,17 +38,24 @@ resource "aws_autoscaling_group" "asg" {
 resource "aws_security_group" "asg-sg" {
   vpc_id = var.vpc_id
   ingress {
-    for_each    = var.asgs.asg_sg.ingress
-    from_port   = var.rds-sg.ingress.from_port
-    to_port     = var.rds-sg.ingress.to_port
-    protocol    = var.rds-sg.ingress.protocol
-    cidr_blocks = var.rds-sg.ingress.cidr_blocks
+    from_port   = var.asgs.asg_sg.ingress_443.from_port
+    to_port     = var.asgs.asg_sg.ingress_443.to_port
+    protocol    = var.asgs.asg_sg.ingress_443.protocol
+    cidr_blocks = var.asgs.asg_sg.ingress_443.cidr_blocks
   }
+
+  ingress {
+    from_port   = var.asgs.asg_sg.ingress_80.from_port
+    to_port     = var.asgs.asg_sg.ingress_80.to_port
+    protocol    = var.asgs.asg_sg.ingress_80.protocol
+    cidr_blocks = var.asgs.asg_sg.ingress_80.cidr_blocks
+  }
+
   egress {
-    from_port   = var.rds-sg.egress.from_port
-    to_port     = var.rds-sg.egress.to_port
-    protocol    = var.rds-sg.egress.protocol
-    cidr_blocks = var.rds-sg.egress.cidr_blocks
+    from_port   = var.asgs.asg_sg.egress.from_port
+    to_port     = var.asgs.asg_sg.egress.to_port
+    protocol    = var.asgs.asg_sg.egress.protocol
+    cidr_blocks = var.asgs.asg_sg.egress.cidr_blocks
   }
   tags = {
     Name = "asg-sg-ivanoff-tf"
