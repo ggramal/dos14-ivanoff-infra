@@ -1,13 +1,19 @@
-variable "lt_vars" {
-    name = string
-}
-
-variable "asg_vars" {
-    name = string
-    availability_zones = list(string)
-    desired_capacity = number
-    min_size = number
-    max_size = number
+variable "asg_services"{
+  type = map(object(
+    {
+      lt = object({
+        name = string
+        path = string
+      })
+      asg = object({
+        name = string
+        availability_zones = list(string)
+        desired_capacity = number
+        min_size = number
+        max_size = number
+      })
+    }
+  ))
 }
 
 variable "asg_sg" {

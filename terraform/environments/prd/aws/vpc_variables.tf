@@ -128,17 +128,17 @@ locals {
 
   asgs = {
     asg_sg = {
-      ingress = {
+      ingress_443 = {
         from_port   = 443
         to_port     = 443
         protocol    = "tcp"
         cidr_blocks = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
         }
-      ingress = {
+      ingress_80 = {
         from_port  = 80
         to_port    = 80
         protocol   = "tcp"
-        cidr_block = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+        cidr_blocks = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
       }
       egress = {
         from_port   = 0
@@ -151,6 +151,7 @@ locals {
       asg_ivanoff_authn_tf = {
         lt = {
           name = "lt-authn-tf"
+          path = "./files/cloud-configs/authn.yaml"
         }
         asg = {
           name = "asg-authn-tf"
@@ -164,6 +165,7 @@ locals {
       asg_ivanoff_authz_tf = {
         lt = {
           name = "lt-authz-tf"
+          path = "./files/cloud-configs/authz.yaml"
         }
         asg = {
           name = "asg-authz-tf"
@@ -177,6 +179,7 @@ locals {
       asg_ivanoff_bank_tf = {
         lt = {
           name = "lt-bank-tf"
+          path = "./files/cloud-configs/bank.yaml"
         }
         asg = {
           name = "asg-bank-tf"
