@@ -6,11 +6,13 @@ resource "aws_route53_zone" "zone" {
   name = var.domain_name
 }
 
+
 resource "aws_route53_record" "record" {
-  count   = length(var.records)
+  for_each = { for idx, record in var.records : idx => record }
+
   zone_id = aws_route53_zone.zone.zone_id
-  name    = var.records[0].name
-  type    = var.records[0].type
+  name    = each.value.name
+  type    = each.value.type
   ttl     = "300"
-  records = var.records[0].records
+  records = each.value.records
 }
