@@ -22,22 +22,22 @@ locals {
   instances = {
     "instance1" = {
       name = "bank-1"
-  dns_records = [
-    {
-        "zone_id" = "zone_id_1"
-        "name"    = "ivan"
-        "type"    = "A"
-        "ttl"     = "300"
-        "records" = ["192.168.1.1"]
-    },
-    {
-        "zone_id" = "zone_id_2"
-        "name"    = "ivan.durak"
-        "type"    = "CNAME"
-        "ttl"     = "3600"
-        "records" =  ["192.168.1.2"]
-    },
-]
+      dns_records = [
+        {
+          "zone_id" = "zone_id_1"
+          "name"    = "ivan"
+          "type"    = "A"
+          "ttl"     = "300"
+          "records" = ["192.168.1.1"]
+        },
+        {
+          "zone_id" = "zone_id_2"
+          "name"    = "ivan.durak"
+          "type"    = "CNAME"
+          "ttl"     = "3600"
+          "records" = ["192.168.1.2"]
+        },
+      ]
     }
   }
 }
@@ -67,12 +67,12 @@ module "vpcs" {
 }
 
 module "dns" {
-  source   = "../../../modules/aws/rout53"
-  domain_name  = var.domain_name
-  records      = var.records
-  record_type  = var.record_type
-  
-}  
+  source      = "../../../modules/aws/rout53"
+  domain_name = var.domain_name
+  records     = var.records
+  record_type = var.record_type
+
+}
 resource "aws_instance" "bank" {
   for_each               = local.instances
   ami                    = data.aws_ami.ubuntu.image_id
