@@ -1,4 +1,4 @@
-domain_name = "example.com"
+domain_name = "ivanoff.smodata.net"
 record_type = "A"
 
 records = [
