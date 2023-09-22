@@ -46,7 +46,8 @@ module "vpcs" {
 module "asgs" {
   source = "../../../modules/aws/asg"
   asg_sg = local.asgs.asg_sg
-  asg_vars = local.asgs.asgs_services
+  asg_services = local.asgs.asgs_services
+  vpc_id = module.vpcs.vpc_id
 }
 ###  !!!!!!   DON`T REMOVE "bank"  !!!!!!
 #resource "aws_instance" "bank" {

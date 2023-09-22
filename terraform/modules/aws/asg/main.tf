@@ -13,29 +13,29 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_launch_template" "lt" {
-    for_each = var.asg.asgs_services
-    name = each.value.name
-    ami = data.aws_ami.ubuntu.image_id
+    for_each = var.asg_services
+    name = each.value.lt.name
+    image_id = data.aws_ami.ubuntu.id
     instance_type = "t3.micro"
     key_name = "esa"
     vpc_security_group_ids = ["${aws_security_group.asg_sg.id}"]
-    user_data = filebase64(each.value.path)
+    user_data = filebase64(each.value.lt.path)
 }
 
 resource "aws_autoscaling_group" "asg" {
-    for_each = var.asg.asgs_services
-    name = each.value.name
-    availability_zones = each.value.availability_zones
-    desired_capacity = each.value.desired_capacity
-    min_size = each.value.min_size
-    max_size = each.value.max_size
+    for_each = var.asg_services
+    name = each.value.asg.name
+    availability_zones = each.value.asg.availability_zones
+    desired_capacity = each.value.asg.desired_capacity
+    min_size = each.value.asg.min_size
+    max_size = each.value.asg.max_size
     launch_template {
       id = aws_launch_template.lt[each.key].id
       version = "$Latest"
     }
 }
 
-resource "aws_security_group" "asg-sg" {
+resource "aws_security_group" "asg_sg" {
   vpc_id = var.vpc_id
   ingress {
     from_port   = var.asg_sg.ingress_443.from_port
