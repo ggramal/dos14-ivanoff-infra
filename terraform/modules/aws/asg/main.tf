@@ -19,7 +19,10 @@ resource "aws_launch_template" "lt" {
     instance_type = each.value.lt.instance_type
     key_name = "esa"
     vpc_security_group_ids = ["${aws_security_group.asg_sg.id}"]
-    user_data = filebase64(each.value.lt.path)
+    user_data = base64encode(templatefile(each.value.lt.path, {
+      branch = each.value.lt.git_branch,
+      secret = each.value.lt.secret
+    }))
 }
 
 resource "aws_autoscaling_group" "asg" {

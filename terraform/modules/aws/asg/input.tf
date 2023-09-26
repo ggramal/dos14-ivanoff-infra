@@ -5,6 +5,8 @@ variable "asg_services"{
         name = string
         path = string
         instance_type = string
+        git_branch = string
+        secret = string
       })
       asg = object({
         name = string
@@ -29,20 +31,4 @@ variable "asg_sg" {
 
 variable "vpc_id" {
   description = "Get vpc id"
-}
-
-variable "secret_authz" {
-  description = "Secret authz"
-  type = string
-}
-
-variable "git_branches" {
-  description = "Git branches to services"
-  type = object(
-    {
-    authn = string
-    authz = string
-    bank = string
-  }
-  )
 }
