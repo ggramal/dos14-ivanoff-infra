@@ -4,6 +4,7 @@ variable "asg_services"{
       lt = object({
         name = string
         path = string
+        instance_type = string
       })
       asg = object({
         name = string

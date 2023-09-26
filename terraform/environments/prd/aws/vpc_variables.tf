@@ -152,6 +152,7 @@ locals {
         lt = {
           name = "lt-authn-tf"
           path = "./files/cloud-configs/authn.yaml"
+          instance_type = "t3.micro"
         }
         asg = {
           name = "asg-authn-tf"
@@ -166,6 +167,7 @@ locals {
         lt = {
           name = "lt-authz-tf"
           path = "./files/cloud-configs/authz.yaml"
+          instance_type = "t3.micro"
         }
         asg = {
           name = "asg-authz-tf"
@@ -180,6 +182,7 @@ locals {
         lt = {
           name = "lt-bank-tf"
           path = "./files/cloud-configs/bank.yaml"
+          instance_type = "t3.micro"
         }
         asg = {
           name = "asg-bank-tf"

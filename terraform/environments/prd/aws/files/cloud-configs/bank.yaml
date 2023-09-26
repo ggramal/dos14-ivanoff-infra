@@ -4,11 +4,7 @@ package_upgrade: true
 packages: 
   - python3-pip
   - git
-write_files:
-  - content: |
-      ggramal
-    path: /tmp/vp.ini
 runcmd:
   - pip install ansible
-  - cd /tmp/ && git clone --branch features-hw-26 https://github.com/ESergiusz/dos14-Eremeev-GitFlow.git authz
-  - cd /tmp/authz/ansible && ansible-playbook -i "127.0.0.1," playbook.yaml --vault-password-file /tmp/vp.ini -c local
+  - cd /tmp/ && git clone --branch feature-hw-26 https://github.com/OpsStrike/dos14-Labzeev_Timofey-git-flow.git bank
+  - cd /tmp/bank/ && ansible-playbook -i "127.0.0.1," playbook.yaml -e "username=bank" -c localplaybook.yaml -c local

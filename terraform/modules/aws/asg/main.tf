@@ -16,7 +16,7 @@ resource "aws_launch_template" "lt" {
     for_each = var.asg_services
     name = each.value.lt.name
     image_id = data.aws_ami.ubuntu.id
-    instance_type = "t3.micro"
+    instance_type = each.value.lt.instance_type
     key_name = "esa"
     vpc_security_group_ids = ["${aws_security_group.asg_sg.id}"]
     user_data = filebase64(each.value.lt.path)
