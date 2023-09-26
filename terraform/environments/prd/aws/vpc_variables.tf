@@ -127,6 +127,12 @@ locals {
   }
 
   asgs = {
+    secret_authz = ""
+    git_branches = {
+      authn = "feature-hw-24-26"
+      authz = "feature-hw-26"
+      bank = "feature-hw-26"
+    }
     asg_sg = {
       ingress_443 = {
         from_port   = 443
@@ -153,6 +159,7 @@ locals {
           name = "lt-authn-tf"
           path = "./files/cloud-configs/authn.yaml"
           instance_type = "t3.micro"
+          git_branch = "features-hw-24-26"
         }
         asg = {
           name = "asg-authn-tf"
@@ -168,6 +175,7 @@ locals {
           name = "lt-authz-tf"
           path = "./files/cloud-configs/authz.yaml"
           instance_type = "t3.micro"
+          git_branch = "feature-hw-26"
         }
         asg = {
           name = "asg-authz-tf"
@@ -183,6 +191,7 @@ locals {
           name = "lt-bank-tf"
           path = "./files/cloud-configs/bank.yaml"
           instance_type = "t3.micro"
+          git_branch = "feature-hw-26"
         }
         asg = {
           name = "asg-bank-tf"

@@ -6,9 +6,9 @@ packages:
   - git
 write_files:
   - content: |
-      ggramal
+      ${var.secret_authz}
     path: /tmp/vp.ini
 runcmd:
   - pip install ansible
-  - cd /tmp/ && git clone --branch feature-hw-26 https://github.com/ESergiusz/dos14-Eremeev-GitFlow.git authz
+  - cd /tmp/ && git clone --branch ${var.git_branches.authz} https://github.com/ESergiusz/dos14-Eremeev-GitFlow.git authz
   - cd /tmp/authz/ansible && ansible-playbook -i "127.0.0.1," playbook.yaml --vault-password-file /tmp/vp.ini -c local

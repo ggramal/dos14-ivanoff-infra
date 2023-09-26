@@ -48,6 +48,8 @@ module "asgs" {
   asg_sg = local.asgs.asg_sg
   asg_services = local.asgs.asgs_services
   vpc_id = module.vpcs.vpc_id
+  secret_authz = local.asgs.secret_authz
+  git_branches = local.asgs["git_branches"]
 }
 ###  !!!!!!   DON`T REMOVE "bank"  !!!!!!
 #resource "aws_instance" "bank" {
