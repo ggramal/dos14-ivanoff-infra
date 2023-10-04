@@ -61,5 +61,5 @@ module "rds" {
   skip_final_snapshot = local.rds["rds-ivanoff-tf"].skip_final_snapshot
   rds-subnet          = local.rds["rds-ivanoff-tf"].rds-subnet
   rds-sg              = local.rds["rds-ivanoff-tf"].rds-sg
-  vpc_id              = module.vpcs.vpc_id  
+  vpc_id              = module.vpcs.vpc_id
 }
