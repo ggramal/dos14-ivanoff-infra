@@ -59,7 +59,7 @@ resource "aws_route_table" "routes" {
     ]
     content {
       cidr_block = route.value.cidr
-      gateway_id = aws_nat_gateway.nats[route.value.nat_gw].id
+      nat_gateway_id = aws_nat_gateway.nats[route.value.nat_gw].id
     }
   }
   route {
