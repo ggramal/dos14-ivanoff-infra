@@ -64,3 +64,13 @@ module "rds" {
   vpc_id              = module.vpcs.vpc_id
 }
 
+output "private_subnet_ids" {
+  description = "IDs of the private subnets from vpc module"
+  value       = module.vpcs.private_subnet_ids
+}
+
+output "public_subnet_ids" {
+  description = "IDs of the public subnets from vpc module"
+  value       = module.vpcs.public_subnet_ids
+}
+
