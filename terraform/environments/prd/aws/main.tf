@@ -62,10 +62,5 @@ module "rds" {
   rds-subnet          = local.rds["rds-ivanoff-tf"].rds-subnet
   rds-sg              = local.rds["rds-ivanoff-tf"].rds-sg
   vpc_id              = module.vpcs.vpc_id
-
-  outputs = {
-    rds_username = module.rds.rds_username
-    rds_password = module.rds.rds_password
-  }
 }
 
