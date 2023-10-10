@@ -158,7 +158,7 @@ locals {
         }
         asg = {
           name = "asg-authn-tf"
-          availability_zones = ["eu-north-1b", "eu-north-1c"]
+          vpc_zone_identifier = [module.vpcs.private_1b[0], module.vpcs.private_1c[0]]
           desired_capacity = 2
           min_size = 2
           max_size = 4
@@ -175,7 +175,7 @@ locals {
         }
         asg = {
           name = "asg-authz-tf"
-          availability_zones = ["eu-north-1a", "eu-north-1c"]
+          vpc_zone_identifier = [module.vpcs.private_1a[0], module.vpcs.private_1c[0]]
           desired_capacity = 2
           min_size = 2
           max_size = 4
@@ -192,7 +192,7 @@ locals {
         }
         asg = {
           name = "asg-bank-tf"
-          availability_zones = ["eu-north-1a", "eu-north-1b"]
+          vpc_zone_identifier = [module.vpcs.private_1a[0], module.vpcs.private_1b[0]]
           desired_capacity = 2
           min_size = 2
           max_size = 4

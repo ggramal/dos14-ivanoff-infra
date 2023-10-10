@@ -28,7 +28,7 @@ resource "aws_launch_template" "lt" {
 resource "aws_autoscaling_group" "asg" {
     for_each = var.asg_services
     name = each.value.asg.name
-    availability_zones = each.value.asg.availability_zones
+    vpc_zone_identifier = each.value.asg.vpc_zone_identifier
     desired_capacity = each.value.asg.desired_capacity
     min_size = each.value.asg.min_size
     max_size = each.value.asg.max_size

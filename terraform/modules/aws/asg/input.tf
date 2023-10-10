@@ -10,7 +10,7 @@ variable "asg_services"{
       })
       asg = object({
         name = string
-        availability_zones = list(string)
+        vpc_zone_identifier = list(string)
         desired_capacity = number
         min_size = number
         max_size = number
