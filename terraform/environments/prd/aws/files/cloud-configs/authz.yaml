@@ -1,0 +1,14 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - python3-pip
+  - git
+write_files:
+  - content: |
+      ${secret}
+    path: /tmp/vp.ini
+runcmd:
+  - pip install ansible
+  - cd /tmp/ && git clone --branch ${branch} https://github.com/ESergiusz/dos14-Eremeev-GitFlow.git authz
+  - cd /tmp/authz/ansible && ansible-playbook -i "127.0.0.1," playbook.yaml --vault-password-file /tmp/vp.ini -c local

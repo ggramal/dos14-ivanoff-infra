@@ -1,0 +1,10 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages: 
+  - python3-pip
+  - git
+runcmd:
+  - pip install ansible
+  - cd /tmp/ && git clone --branch ${branch} https://github.com/CyberCuCuber/dos14-polikarpov_ruslan-gitflow.git authn
+  - cd /tmp/authn/ansible && ansible-playbook -i "127.0.0.1," playbook.yaml -c local

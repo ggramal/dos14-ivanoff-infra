@@ -3,3 +3,4 @@
 *.terraform/
 .idea/
 venv/
+terraform/environments/prd/aws/tf_secrets.tf
