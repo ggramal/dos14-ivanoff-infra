@@ -42,6 +42,18 @@ resource "random_password" "password" {
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
+
+output "rds_username" {
+  description = "Username for RDS"
+  value       = aws_db_instance.postgres.username
+}
+
+output "rds_password" {
+  description = "Password for RDS"
+  value       = random_password.password.result
+  sensitive   = true
+}
+
 # create a RDS Database Instance
 resource "aws_db_instance" "postgres" {
   engine                 = var.engine
@@ -57,22 +69,7 @@ resource "aws_db_instance" "postgres" {
   skip_final_snapshot    = var.skip_final_snapshot
 }
 
-  provisioner "local-exec" {
-    command = <<-EOT
-      export RDS_USERNAME=${aws_db_instance.postgres.username}
-      export RDS_PASSWORD=${random_password.password.result}
-    EOT
-  }
-}
 
-output "rds_username" {
-  description = "UserName for RDS"
-  value       = aws_db_instance.postgres.username
-}
 
-output "rds_password" {
-  description = "Password for RDS"
-  value       = random_password.password.result
-  sensitive   = true
-}
+
 

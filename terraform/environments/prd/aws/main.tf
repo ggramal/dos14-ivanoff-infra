@@ -64,13 +64,5 @@ module "rds" {
   vpc_id              = module.vpcs.vpc_id
 }
 
-output "rds_username" {
-  description = "UserName for RDS"
-  value       = module.rds.rds_username
-}
 
-output "rds_password" {
-  description = "Password for RDS"
-  value       = module.rds.rds_password
-}
 
