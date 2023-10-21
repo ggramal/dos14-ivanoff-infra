@@ -42,6 +42,16 @@ module "vpcs" {
   nat_gws      = local.vpcs["ivanoff-tf"].nat_gws
   subnets      = local.vpcs["ivanoff-tf"].subnets
 }
+
+output "vpc_private_subnet_ids" {
+  description = "IDs of private subnets from VPC module"
+  value       = module.vpcs.private_subnet_ids
+}
+
+output "vpc_public_subnet_ids" {
+  description = "IDs of public subnets from VPC module"
+  value       = module.vpcs.public_subnet_ids
+}
 ####  !!!!!!   DON`T REMOVE "bank"  !!!!!!
 #resource "aws_instance" "bank" {
 #  ami                    = data.aws_ami.ubuntu.image_id
@@ -49,6 +59,7 @@ module "vpcs" {
 #  key_name               = "gae"
 #  vpc_security_group_ids = ["sg-054db3afbc0cbfe19"]
 #}
+
 module "rds" {
   source              = "../../../modules/aws/rds"
   name                = local.rds["rds-ivanoff-tf"].name
@@ -64,13 +75,4 @@ module "rds" {
   vpc_id              = module.vpcs.vpc_id
 }
 
-output "private_subnet_ids" {
-  description = "IDs of the private subnets from vpc module"
-  value       = module.vpcs.private_subnet_ids
-}
-
-output "public_subnet_ids" {
-  description = "IDs of the public subnets from vpc module"
-  value       = module.vpcs.public_subnet_ids
-}
 
