@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authz
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: authz
+    bank: ivanoff
+    env: prd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: authz
+      bank: ivanoff
+      env: prd
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+  template:
+    metadata:
+      labels:
+        app: authz
+        bank: ivanoff
+        env: prd
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25.2
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+          - name: nginx-config
+            mountPath: /etc/nginx
+      - name: authz
+        image: esergiusz/dos14-authz:latest
+#        env:
+#        - name: PG_DATABASE
+#          value: authz
+#        - name: PG_USER
+#          valueFrom:
+#            secretKeyRef:
+#              key: username
+#              name: ivanoff-db-creds
+#        - name: PG_PASSWORD
+#          valueFrom:
+#            secretKeyRef:
+#              key: password
+#              name: ivanoff-db-creds
+#        - name: PG_HOST
+#          value: rds-ivanoff-tf.c0whq4jiugzq.eu-north-1.rds.amazonaws.com
+#        - name: PG_PORT
+#          value: "5432"
+      volumes:
+      - configMap:
+          name: authz-nginx-config
+        name: nginx-config
