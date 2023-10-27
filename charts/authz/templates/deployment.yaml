@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authz
+  name: {{ .Values.name }}
   namespace: {{ .Release.Namespace }}
   labels:
     app: authz

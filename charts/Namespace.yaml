@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ivanoff-bank
+  labels:
+    bank: ivanoff
+    env: prd

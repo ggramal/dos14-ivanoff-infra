@@ -1,2 +1,3 @@
-cert-manager:
-  namespace: {{ .Release.Namespace }}
+name: authz
+#cert-manager:
+#  namespace: {{ .Release.Namespace }}

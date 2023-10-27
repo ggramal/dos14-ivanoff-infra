@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: authz-nginx-config
+  name: {{ .Values.name }}-nginx-config
   namespace: {{ .Release.Namespace }}
 data:
   nginx.conf: |-
