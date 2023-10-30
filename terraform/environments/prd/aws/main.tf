@@ -43,15 +43,6 @@ module "vpcs" {
   subnets      = local.vpcs["ivanoff-tf"].subnets
 }
 
-output "vpc_private_subnet_ids" {
-  description = "IDs of private subnets from VPC module"
-  value       = module.vpcs.private_subnet_ids
-}
-
-output "vpc_public_subnet_ids" {
-  description = "IDs of public subnets from VPC module"
-  value       = module.vpcs.public_subnet_ids
-}
 ####  !!!!!!   DON`T REMOVE "bank"  !!!!!!
 #resource "aws_instance" "bank" {
 #  ami                    = data.aws_ami.ubuntu.image_id
