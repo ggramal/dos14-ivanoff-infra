@@ -1,0 +1,10 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages: 
+  - python3-pip
+  - git
+runcmd:
+  - pip install ansible
+  - cd /tmp/ && git clone --branch ${branch} https://github.com/OpsStrike/dos14-Labzeev_Timofey-git-flow.git bank
+  - cd /tmp/bank/ && ansible-playbook -i "127.0.0.1," playbook.yaml -e "username=bank" -c localplaybook.yaml -c local

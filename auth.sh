@@ -4,7 +4,7 @@ read -p 'Enter your MFA code: ' mfa_code
 read -p 'Enter your MFA name: ' mfa_name
 read -p 'Enter your profile name: ' profile_name
 export AWS_PROFILE=$profile_name
-accountID=$( aws sts get-caller-identity  | jq -r '.Account')
+accountID=$( aws sts get-caller-identity --profile $profile_name | jq -r '.Account')
 json=$( aws sts assume-role --role-arn arn:aws:iam::$accountID:role/Admins \
 --role-session-name tf \
 --serial-number arn:aws:iam::$accountID:mfa/$mfa_name \

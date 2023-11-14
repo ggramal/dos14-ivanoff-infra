@@ -43,7 +43,14 @@ module "vpcs" {
   subnets      = local.vpcs["ivanoff-tf"].subnets
 }
 
-####  !!!!!!   DON`T REMOVE "bank"  !!!!!!
+module "asgs" {
+  source = "../../../modules/aws/asg"
+  asg_sg = local.asgs.asg_sg
+  asg_services = local.asgs.asgs_services
+  vpc_id = module.vpcs.vpc_id
+}
+###  !!!!!!   DON`T REMOVE "bank"  !!!!!!
+
 #resource "aws_instance" "bank" {
 #  ami                    = data.aws_ami.ubuntu.image_id
 #  instance_type          = "t3.micro"
@@ -65,5 +72,4 @@ module "rds" {
   rds-sg              = local.rds["rds-ivanoff-tf"].rds-sg
   vpc_id              = module.vpcs.vpc_id
 }
-
 
