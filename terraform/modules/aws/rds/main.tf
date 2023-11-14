@@ -42,6 +42,8 @@ resource "random_password" "password" {
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
+
+
 # create a RDS Database Instance
 resource "aws_db_instance" "postgres" {
   engine                 = var.engine
@@ -56,4 +58,8 @@ resource "aws_db_instance" "postgres" {
   db_subnet_group_name   = aws_db_subnet_group.db_subnet.name
   skip_final_snapshot    = var.skip_final_snapshot
 }
+
+
+
+
 
