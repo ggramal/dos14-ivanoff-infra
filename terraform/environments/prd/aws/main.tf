@@ -57,6 +57,7 @@ module "asgs" {
 #  key_name               = "gae"
 #  vpc_security_group_ids = ["sg-054db3afbc0cbfe19"]
 #}
+
 module "rds" {
   source              = "../../../modules/aws/rds"
   name                = local.rds["rds-ivanoff-tf"].name
@@ -71,6 +72,4 @@ module "rds" {
   rds-sg              = local.rds["rds-ivanoff-tf"].rds-sg
   vpc_id              = module.vpcs.vpc_id
 }
-
-
 

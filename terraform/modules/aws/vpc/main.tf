@@ -76,3 +76,18 @@ resource "aws_route_table_association" "subnets" {
   subnet_id      = aws_subnet.subnet[each.key].id
   route_table_id = aws_route_table.routes[each.key].id
 }
+
+output "vpc_id" {
+  description = "ID of the VPC"
+  value       = aws_vpc.vpc.id
+}
+
+output "private_subnet_ids" {
+  description = "IDs of private subnets"
+  value       = [for key, subnet in aws_subnet.subnet : subnet.id if contains(keys(var.subnets), key)]
+}
+
+output "public_subnet_ids" {
+  description = "IDs of public subnets"
+  value       = [for subnet in aws_subnet.subnet : subnet.id if subnet.map_public_ip_on_launch]
+}
